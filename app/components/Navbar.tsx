@@ -1,14 +1,18 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Zap } from 'lucide-react'; // Placeholder logo icon
+import ContactModal from './ContactModal';
 
 interface NavbarProps {
     mode?: 'default' | 'simple';
 }
 
 export default function Navbar({ mode = 'default' }: NavbarProps) {
+    const [isContactOpen, setIsContactOpen] = useState(false);
+
     if (mode === 'simple') {
         return (
             <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0B0E25]/80 border-b border-white/5">
@@ -65,11 +69,14 @@ export default function Navbar({ mode = 'default' }: NavbarProps) {
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={() => setIsContactOpen(true)}
                     className="bg-[#4F46E5] hover:bg-[#4338ca] text-white px-5 py-2 rounded-full text-sm font-medium transition-colors shadow-[0_0_15px_rgba(79,70,229,0.5)]"
                 >
                     Contact Us
                 </motion.button>
             </div>
+
+            <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
         </nav>
     );
 }
