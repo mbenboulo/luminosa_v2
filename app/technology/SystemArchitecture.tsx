@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Sun, Wind, Sliders, ShieldCheck, Asterisk } from 'lucide-react';
+import ModelViewer from '../components/ModelViewer';
 
 export default function SystemArchitecture() {
     return (
@@ -23,20 +24,15 @@ export default function SystemArchitecture() {
                         whileInView={{ opacity: 1, x: 0, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="relative min-h-[400px] w-full bg-[#050714] border border-white/5 rounded-3xl overflow-hidden flex flex-col"
+                        className="relative min-h-[400px] w-full flex flex-col"
                     >
-                        {/* Visual placeholder for the isometric blue box */}
-                        <div className="flex-1 flex items-center justify-center relative">
-                            <div className="w-64 h-64 border-4 border-blue-500/20 bg-blue-500/5 shadow-[0_0_100px_rgba(59,130,246,0.1)] relative">
-                                <div className="absolute inset-4 border border-blue-400/30" />
-                                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent" />
-                            </div>
-                            {/* "Schematic" Badge */}
-                            <div className="absolute bottom-16 left-8 bg-blue-600 px-3 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
-                                Schematic
-                            </div>
-                            <div className="absolute bottom-8 left-8 text-white font-bold text-sm">
-                                4-Source Isometric View
+                        {/* Interactive 3D Model */}
+                        <div className="flex-1 w-full h-full relative cursor-move">
+                            <ModelViewer />
+
+                            {/* "Interactive" Badge */}
+                            <div className="absolute bottom-6 left-8 bg-blue-600/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-wider pointer-events-none">
+                                Interactive 3D
                             </div>
                         </div>
                     </motion.div>
