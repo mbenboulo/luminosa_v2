@@ -7,7 +7,7 @@ import { BarChart3 } from "lucide-react";
 
 const TraceProCarousel = () => {
     const [index, setIndex] = useState(0);
-    const images = ['/irradiance-1.jpg', '/irradiance2.jpg'];
+    const images = ['/irradiance-1-wide.png', '/irradiance-2-wide.png'];
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -20,7 +20,7 @@ const TraceProCarousel = () => {
 
     return (
         <div
-            className="w-full h-full bg-black relative cursor-pointer group"
+            className="w-full h-full relative cursor-pointer group"
             onClick={toggle}
         >
             <AnimatePresence mode="popLayout">
@@ -43,7 +43,7 @@ const TraceProCarousel = () => {
 
             <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 text-xs text-white font-mono flex items-center gap-2 z-10">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                Fig 2.2: Irradiance Distribution (Click to Toggle)
+                Fig 2.2: Irradiance Distribution
             </div>
         </div>
     );
