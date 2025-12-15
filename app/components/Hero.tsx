@@ -80,7 +80,7 @@ export default function Hero() {
                         <div className="absolute inset-0 bg-blue-500/10 blur-[80px] rounded-full scale-75 animate-pulse" />
 
                         <Image
-                            src="/photo-hero.png"
+                            src="/photo-hero2.png"
                             alt="NeoBreath Guard Device"
                             fill
                             priority
