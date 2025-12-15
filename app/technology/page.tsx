@@ -13,7 +13,7 @@ import { ArrowLeft } from 'lucide-react';
 export default function TechnologyPage() {
     return (
         <main className="min-h-screen bg-[#0B0E25] overflow-x-hidden selection:bg-blue-500/30 selection:text-blue-200 font-sans">
-            <Navbar />
+            <Navbar showNavLinks={false} />
 
             {/* Header Section */}
             <section className="pt-32 pb-12 relative overflow-hidden">

@@ -8,9 +8,10 @@ import ContactModal from './ContactModal';
 
 interface NavbarProps {
     mode?: 'default' | 'simple';
+    showNavLinks?: boolean;
 }
 
-export default function Navbar({ mode = 'default' }: NavbarProps) {
+export default function Navbar({ mode = 'default', showNavLinks = true }: NavbarProps) {
     const [isContactOpen, setIsContactOpen] = useState(false);
 
     if (mode === 'simple') {
@@ -49,21 +50,23 @@ export default function Navbar({ mode = 'default' }: NavbarProps) {
                 </Link>
 
                 {/* Desktop Links */}
-                <div className="hidden md:flex items-center gap-8">
-                    {[
-                        { name: 'Motivation', href: '/#motivation' },
-                        { name: 'Innovation', href: '/#technology' },
-                        { name: 'Impact', href: '/#impact' }
-                    ].map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
-                        >
-                            {item.name}
-                        </Link>
-                    ))}
-                </div>
+                {showNavLinks && (
+                    <div className="hidden md:flex items-center gap-8">
+                        {[
+                            { name: 'Motivation', href: '/#motivation' },
+                            { name: 'Innovation', href: '/#technology' },
+                            { name: 'Impact', href: '/#impact' }
+                        ].map((item) => (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
+                    </div>
+                )}
 
                 {/* CTA Button */}
                 <motion.button
