@@ -1,8 +1,53 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { BarChart3 } from "lucide-react";
+
+const TraceProCarousel = () => {
+    const [index, setIndex] = useState(0);
+    const images = ['/irradiance-1.jpg', '/irradiance2.jpg'];
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setIndex((prev) => (prev + 1) % images.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const toggle = () => setIndex((prev) => (prev + 1) % images.length);
+
+    return (
+        <div
+            className="w-full h-full bg-black relative cursor-pointer group"
+            onClick={toggle}
+        >
+            <AnimatePresence mode="popLayout">
+                <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full"
+                >
+                    <Image
+                        src={images[index]}
+                        alt="Irradiance Simulation"
+                        fill
+                        className="object-cover"
+                    />
+                </motion.div>
+            </AnimatePresence>
+
+            <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 text-xs text-white font-mono flex items-center gap-2 z-10">
+                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                Fig 2.2: Irradiance Distribution (Click to Toggle)
+            </div>
+        </div>
+    );
+};
 
 export default function SimulationTabs() {
     const [activeTab, setActiveTab] = useState('comsol');
@@ -144,9 +189,8 @@ export default function SimulationTabs() {
                                         </div>
                                     )}
                                     {activeTab === 'tracepro' && (
-                                        <div className="w-full h-full opacity-60 mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]">
-                                            {/* Mock irradiance map gradient */}
-                                            <div className="w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-400 via-emerald-600 to-black opacity-50 blur-2xl" />
+                                        <div className="w-full h-full relative">
+                                            <TraceProCarousel />
                                         </div>
                                     )}
                                     {activeTab === 'solidworks' && (
@@ -161,9 +205,11 @@ export default function SimulationTabs() {
                                     )}
                                 </div>
 
-                                <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur px-2 py-1 rounded text-[10px] font-mono text-white border border-white/10">
-                                    {tabContent[activeTab as keyof typeof tabContent].visualLabel}
-                                </div>
+                                {activeTab !== 'tracepro' && (
+                                    <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur px-2 py-1 rounded text-[10px] font-mono text-white border border-white/10">
+                                        {tabContent[activeTab as keyof typeof tabContent].visualLabel}
+                                    </div>
+                                )}
                             </div>
 
                         </motion.div>
