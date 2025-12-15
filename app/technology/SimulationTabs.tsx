@@ -56,7 +56,7 @@ const ImageCarousel = ({ images, label }: { images: string[], label: string }) =
 
 
 export default function SimulationTabs() {
-    const [activeTab, setActiveTab] = useState('comsol');
+    const [activeTab, setActiveTab] = useState('tracepro');
 
     const stats = [
         { label: "Avg Irradiance", value: "30", unit: "μW/cm²/nm" },
@@ -66,23 +66,11 @@ export default function SimulationTabs() {
     ];
 
     const tabs = [
-        { id: 'comsol', label: 'COMSOL Multiphysics' },
         { id: 'tracepro', label: 'TracePro Optical' },
         { id: 'solidworks', label: 'SolidWorks CAD' },
     ];
 
     const tabContent = {
-        comsol: {
-            title: "Thermal Distribution Analysis",
-            description: "Finite Element Analysis (FEA) performed in COMSOL demonstrates that the active cooling system effectively dissipates heat from the LED arrays. The mannequin surface temperature remains stable at 36.5°C over a 4-hour simulation period, well within the safe zone for neonatal patients.",
-            points: [
-                "Validated against convective heat transfer models.",
-                "Hotspots identified and mitigated in revision B."
-            ],
-            visualLabel: "Fig 2.1: Thermal Map",
-            gradient: "from-orange-500/20 to-red-500/5",
-            borderColor: "border-orange-500/30"
-        },
         tracepro: {
             title: "Optical Irradiance Simulation",
             description: "Full four-source ray-tracing simulations performed in TracePro confirm that the configuration achieves comprehensive 360-degree coverage. The system delivers a uniform irradiance of 30 μW/cm²/nm across the entire neonatal body surface, effectively eliminating the shadow zones common in single-source devices.",
@@ -188,12 +176,6 @@ export default function SimulationTabs() {
                             <div className={`relative aspect-video rounded-xl bg-gradient-to-br ${tabContent[activeTab as keyof typeof tabContent].gradient} border ${tabContent[activeTab as keyof typeof tabContent].borderColor} overflow-hidden group`}>
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     {/* Abstract Visualization based on tab type */}
-                                    {activeTab === 'comsol' && (
-                                        <div className="w-full h-full opacity-60 mix-blend-screen bg-[url('https://grainy-gradients.vercel.app/noise.svg')]">
-                                            {/* Mock thermal map gradient */}
-                                            <div className="w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-500 via-red-500 to-blue-900 opacity-50 blur-3xl" />
-                                        </div>
-                                    )}
                                     {activeTab === 'tracepro' && (
                                         <div className="w-full h-full relative">
                                             <ImageCarousel
@@ -211,12 +193,6 @@ export default function SimulationTabs() {
                                         </div>
                                     )}
                                 </div>
-
-                                {activeTab !== 'tracepro' && activeTab !== 'solidworks' && (
-                                    <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur px-2 py-1 rounded text-[10px] font-mono text-white border border-white/10">
-                                        {tabContent[activeTab as keyof typeof tabContent].visualLabel}
-                                    </div>
-                                )}
                             </div>
 
                         </motion.div>
