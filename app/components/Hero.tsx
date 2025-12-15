@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import Section from './Section';
 import { ArrowRight, Zap } from 'lucide-react';
@@ -58,29 +59,49 @@ export default function Hero() {
                     </div>
                 </motion.div>
 
-                {/* Hero Visual / Placeholder for Device Image */}
+                {/* Hero Visual */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: false }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="relative"
+                    animate={{ y: [0, -15, 0] }}
+                    transition={{
+                        duration: 0.8,
+                        delay: 0.2,
+                        y: {
+                            duration: 4,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }
+                    }}
+                    className="relative flex justify-center items-center"
                 >
-                    <div className="aspect-square rounded-3xl bg-gradient-to-br from-[#1E2342] to-[#0f1121] border border-white/5 p-8 relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-blue-500/5 group-hover:bg-blue-500/10 transition-colors duration-500" />
+                    <div className="relative w-full max-w-[600px] aspect-square">
+                        {/* Background abstract glow behind the device */}
+                        <div className="absolute inset-0 bg-blue-500/10 blur-[80px] rounded-full scale-75 animate-pulse" />
 
-                        {/* Abstract Light Representation */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500 blur-[80px] opacity-60 animate-pulse" />
+                        <Image
+                            src="/photo-hero.png"
+                            alt="NeoBreath Guard Device"
+                            fill
+                            priority
+                            className="object-contain drop-shadow-[0_0_30px_rgba(59,130,246,0.2)]"
+                        />
 
-                        <div className="absolute bottom-8 left-8 right-8 p-4 bg-black/40 backdrop-blur-md rounded-xl border border-white/10 flex items-center justify-between">
-                            <div>
-                                <p className="text-xs text-gray-400 uppercase tracking-widest">Target Irradiance</p>
-                                <p className="text-xl font-bold text-white">50 µW/cm²/nm</p>
-                            </div>
+                        {/* Floating data card overlay */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.5, duration: 0.5 }}
+                            className="absolute bottom-10 right-0 bg-black/60 backdrop-blur-md px-4 py-3 rounded-xl border border-white/10 flex items-center gap-3 shadow-xl"
+                        >
                             <div className="w-10 h-10 rounded-full bg-blue-600/20 flex items-center justify-center">
                                 <Zap size={20} className="text-blue-400" />
                             </div>
-                        </div>
+                            <div>
+                                <p className="text-[10px] text-gray-400 uppercase tracking-widest font-semibold">Irradiance</p>
+                                <p className="text-lg font-bold text-white">50 µW/cm²/nm</p>
+                            </div>
+                        </motion.div>
                     </div>
                 </motion.div>
 
