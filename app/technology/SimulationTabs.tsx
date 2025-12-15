@@ -5,16 +5,20 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { BarChart3 } from "lucide-react";
 
-const TraceProCarousel = () => {
+const ImageCarousel = ({ images, label }: { images: string[], label: string }) => {
     const [index, setIndex] = useState(0);
-    const images = ['/irradiance-1-wide.png', '/irradiance-2-wide.png'];
+
+    /* Reset index when images change to avoid out of bounds */
+    useEffect(() => {
+        setIndex(0);
+    }, [images]);
 
     useEffect(() => {
         const timer = setInterval(() => {
             setIndex((prev) => (prev + 1) % images.length);
         }, 5000);
         return () => clearInterval(timer);
-    }, []);
+    }, [images.length]);
 
     const toggle = () => setIndex((prev) => (prev + 1) % images.length);
 
@@ -25,7 +29,7 @@ const TraceProCarousel = () => {
         >
             <AnimatePresence mode="popLayout">
                 <motion.div
-                    key={index}
+                    key={`${label}-${index}`} /* Ensure unique keys when switching tabs */
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -50 }}
@@ -34,7 +38,7 @@ const TraceProCarousel = () => {
                 >
                     <Image
                         src={images[index]}
-                        alt="Irradiance Simulation"
+                        alt={label}
                         fill
                         className="object-cover"
                     />
@@ -43,11 +47,13 @@ const TraceProCarousel = () => {
 
             <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 text-xs text-white font-mono flex items-center gap-2 z-10">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                Fig 2.2: Irradiance Distribution
+                {label}
             </div>
         </div>
     );
 };
+// ... (skip down to render part)
+
 
 export default function SimulationTabs() {
     const [activeTab, setActiveTab] = useState('comsol');
@@ -190,22 +196,23 @@ export default function SimulationTabs() {
                                     )}
                                     {activeTab === 'tracepro' && (
                                         <div className="w-full h-full relative">
-                                            <TraceProCarousel />
+                                            <ImageCarousel
+                                                images={['/irradiance-1-wide.png', '/irradiance-2-wide.png']}
+                                                label="Fig 2.2: Irradiance Distribution"
+                                            />
                                         </div>
                                     )}
                                     {activeTab === 'solidworks' && (
-                                        <div className="w-full h-full opacity-40">
-                                            {/* Mock CAD wireframe look */}
-                                            <div className="w-full h-full bg-[linear-gradient(45deg,rgba(59,130,246,0.1)_25%,transparent_25%,transparent_50%,rgba(59,130,246,0.1)_50%,rgba(59,130,246,0.1)_75%,transparent_75%,transparent)] bg-[length:20px_20px]" />
-                                            <div className="absolute inset-0 flex items-center justify-center">
-                                                <div className="w-32 h-32 border-2 border-blue-500/30 rotate-12" />
-                                                <div className="w-32 h-32 border-2 border-blue-500/30 -rotate-12 absolute" />
-                                            </div>
+                                        <div className="w-full h-full relative">
+                                            <ImageCarousel
+                                                images={['/3d-model-1-wide.png', '/3d-model-2-wide.png', '/projection-drawings-wide.png']}
+                                                label="Fig 2.3: Assembly CAD Model"
+                                            />
                                         </div>
                                     )}
                                 </div>
 
-                                {activeTab !== 'tracepro' && (
+                                {activeTab !== 'tracepro' && activeTab !== 'solidworks' && (
                                     <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur px-2 py-1 rounded text-[10px] font-mono text-white border border-white/10">
                                         {tabContent[activeTab as keyof typeof tabContent].visualLabel}
                                     </div>
