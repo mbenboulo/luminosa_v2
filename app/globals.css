@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  /* Core Brand Colors */
+  --background: #0B0E25; /* Deep Navy Blue for main background */
+  --foreground: #F2F2F2; /* Off-white for text */
+  --primary: #4F46E5; /* Indigo/Blue for primary actions */
+  --secondary: #1E2342; /* Lighter navy for cards/sections */
+  --accent-glow: #3B82F6; /* Cyan/Blue for glows */
+  --text-muted: #9CA3AF;
+  
+  /* Gradient stops */
+  --gradient-start: #1A1E3B;
+  --gradient-end: #0B0E25;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent-glow: var(--accent-glow);
+  --color-text-muted: var(--text-muted);
+  
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden; /* Prevent horizontal scroll from animations */
+}
+
+/* Custom Utilities for Glow Effects */
+.glow-text {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.glow-box {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+}
