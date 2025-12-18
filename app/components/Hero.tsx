@@ -1,9 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import Section from './Section';
+import ModelViewer from './ModelViewer';
 import { ArrowRight, Zap } from 'lucide-react';
 
 export default function Hero() {
@@ -79,13 +79,10 @@ export default function Hero() {
                         {/* Background abstract glow behind the device */}
                         <div className="absolute inset-0 bg-blue-500/10 blur-[80px] rounded-full scale-75 animate-pulse" />
 
-                        <Image
-                            src="/photo-hero2.png"
-                            alt="NeoBreath Guard Device"
-                            fill
-                            priority
-                            className="object-contain drop-shadow-[0_0_30px_rgba(59,130,246,0.2)]"
-                        />
+                        {/* 3D Model Viewer */}
+                        <div className="absolute inset-0">
+                            <ModelViewer />
+                        </div>
 
                         {/* Floating data card overlay */}
                         <motion.div

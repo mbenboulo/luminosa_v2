@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from "framer-motion";
+import Image from 'next/image';
 import { Sun, Wind, Sliders, ShieldCheck, Asterisk } from 'lucide-react';
-import ModelViewer from '../components/ModelViewer';
 
 export default function SystemArchitecture() {
     return (
@@ -26,13 +26,15 @@ export default function SystemArchitecture() {
                         transition={{ duration: 0.8 }}
                         className="relative min-h-[400px] w-full flex flex-col"
                     >
-                        {/* Interactive 3D Model */}
-                        <div className="flex-1 w-full h-full relative cursor-move">
-                            <ModelViewer />
-
-                            {/* "Interactive" Badge */}
-                            <div className="absolute bottom-6 left-8 bg-blue-600/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-wider pointer-events-none">
-                                Interactive 3D
+                        {/* Device Image */}
+                        <div className="flex-1 w-full h-full relative">
+                            <div className="relative w-full h-full min-h-[400px]">
+                                <Image
+                                    src="/luminosa.png"
+                                    alt="Luminosa Device"
+                                    fill
+                                    className="object-contain drop-shadow-[0_0_30px_rgba(59,130,246,0.2)]"
+                                />
                             </div>
                         </div>
                     </motion.div>

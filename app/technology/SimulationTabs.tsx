@@ -1,63 +1,9 @@
 'use client';
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { BarChart3 } from "lucide-react";
-
-const ImageCarousel = ({ images, label }: { images: string[], label: string }) => {
-    const [index, setIndex] = useState(0);
-
-    /* Reset index when images change to avoid out of bounds */
-    useEffect(() => {
-        setIndex(0);
-    }, [images]);
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setIndex((prev) => (prev + 1) % images.length);
-        }, 5000);
-        return () => clearInterval(timer);
-    }, [images.length]);
-
-    const toggle = () => setIndex((prev) => (prev + 1) % images.length);
-
-    return (
-        <div
-            className="w-full h-full relative cursor-pointer group"
-            onClick={toggle}
-        >
-            <AnimatePresence mode="popLayout">
-                <motion.div
-                    key={`${label}-${index}`} /* Ensure unique keys when switching tabs */
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -50 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="absolute inset-0 w-full h-full"
-                >
-                    <Image
-                        src={images[index]}
-                        alt={label}
-                        fill
-                        className="object-cover"
-                    />
-                </motion.div>
-            </AnimatePresence>
-
-            <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 text-xs text-white font-mono flex items-center gap-2 z-10">
-                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                {label}
-            </div>
-        </div>
-    );
-};
-// ... (skip down to render part)
-
+import { motion } from "framer-motion";
+import { BarChart3, Zap, Box } from "lucide-react";
 
 export default function SimulationTabs() {
-    const [activeTab, setActiveTab] = useState('tracepro');
-
     const stats = [
         { label: "Avg Irradiance", value: "30", unit: "μW/cm²/nm" },
         { label: "Surface Temp", value: "< 37", unit: "°C" },
@@ -65,35 +11,38 @@ export default function SimulationTabs() {
         { label: "Peak Wavelength", value: "460", unit: "nm" },
     ];
 
-    const tabs = [
-        { id: 'tracepro', label: 'TracePro Optical' },
-        { id: 'solidworks', label: 'SolidWorks CAD' },
-    ];
-
-    const tabContent = {
-        tracepro: {
+    const simulations = [
+        {
+            id: 'tracepro',
+            icon: Zap,
             title: "Optical Irradiance Simulation",
+            subtitle: "TracePro Optical",
             description: "Full four-source ray-tracing simulations performed in TracePro confirm that the configuration achieves comprehensive 360-degree coverage. The system delivers a uniform irradiance of 30 μW/cm²/nm across the entire neonatal body surface, effectively eliminating the shadow zones common in single-source devices.",
             points: [
                 "Validated >0.7 uniformity ratio across curved surfaces.",
                 "Confirmed zero shadow zones on lateral aspects."
             ],
-            visualLabel: "Fig 2.2: Irradiance Surface Plot",
             gradient: "from-green-500/20 to-emerald-500/5",
-            borderColor: "border-green-500/30"
+            borderColor: "border-green-500/30",
+            iconBg: "bg-green-500/20",
+            iconColor: "text-green-400"
         },
-        solidworks: {
+        {
+            id: 'solidworks',
+            icon: Box,
             title: "Mechanical Modeling & Assembly",
+            subtitle: "SolidWorks CAD",
             description: "Comprehensive 3D mechanical simulations in SolidWorks were instrumental in defining the final structural architecture. We utilized the CAD environment to validate the precise integration of the four-source array, cooling channels, and adjustable mounting mechanisms, ensuring robustness and ease of assembly.",
             points: [
                 "Confirmed interference-free fit for 150+ components.",
                 "Validated structural integrity of moving gantry parts."
             ],
-            visualLabel: "Fig 2.3: Assembly CAD Model",
             gradient: "from-blue-500/20 to-cyan-500/5",
-            borderColor: "border-blue-500/30"
+            borderColor: "border-blue-500/30",
+            iconBg: "bg-blue-500/20",
+            iconColor: "text-blue-400"
         }
-    };
+    ];
 
     return (
         <section className="py-20 relative">
@@ -109,96 +58,72 @@ export default function SimulationTabs() {
                 {/* Stats Row */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                     {stats.map((stat, i) => (
-                        <div key={i} className="bg-[#111425] border border-white/5 p-6 rounded-xl">
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.1 }}
+                            className="bg-[#111425] border border-white/5 p-6 rounded-xl"
+                        >
                             <div className="text-xs text-gray-400 mb-1">{stat.label}</div>
                             <div className="flex items-baseline gap-1">
                                 <span className="text-2xl font-bold text-white">{stat.value}</span>
                                 <span className="text-xs text-gray-500">{stat.unit}</span>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
-                {/* Tabs Container */}
-                <div className="bg-[#111425] border border-white/5 rounded-3xl p-2 md:p-8">
-
-                    {/* Tab Navigation */}
-                    <div className="flex flex-wrap gap-1 mb-8 border-b border-white/5 pb-1">
-                        {tabs.map((tab) => (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`px-4 py-3 text-sm font-medium transition-colors relative ${activeTab === tab.id ? 'text-blue-400' : 'text-gray-400 hover:text-white'
-                                    }`}
-                            >
-                                {tab.label}
-                                {activeTab === tab.id && (
-                                    <motion.div
-                                        layoutId="activeTab"
-                                        className="absolute bottom-[-5px] left-0 right-0 h-0.5 bg-blue-500"
-                                    />
-                                )}
-                            </button>
-                        ))}
-                    </div>
-
-                    {/* Tab Content Area */}
-                    <AnimatePresence mode="wait">
+                {/* Side-by-Side Simulation Cards */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {simulations.map((sim, index) => (
                         <motion.div
-                            key={activeTab}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.3 }}
-                            className="grid grid-cols-1 lg:grid-cols-2 gap-12"
+                            key={sim.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.2 }}
+                            className={`bg-[#111425] border ${sim.borderColor} rounded-2xl p-6 md:p-8 hover:border-opacity-60 transition-all group`}
                         >
-                            {/* Text Content */}
-                            <div className="py-4">
-                                <h3 className="text-xl font-bold text-white mb-6">
-                                    {tabContent[activeTab as keyof typeof tabContent].title}
-                                </h3>
-                                <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                                    {tabContent[activeTab as keyof typeof tabContent].description}
-                                </p>
-                                <ul className="space-y-3">
-                                    {tabContent[activeTab as keyof typeof tabContent].points.map((point, i) => (
-                                        <li key={i} className="flex items-start gap-3 text-sm text-gray-400">
-                                            <div className="w-4 h-4 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                                            </div>
-                                            {point}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            {/* Visual Content Placeholder */}
-                            <div className={`relative aspect-video rounded-xl bg-gradient-to-br ${tabContent[activeTab as keyof typeof tabContent].gradient} border ${tabContent[activeTab as keyof typeof tabContent].borderColor} overflow-hidden group`}>
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    {/* Abstract Visualization based on tab type */}
-                                    {activeTab === 'tracepro' && (
-                                        <div className="w-full h-full relative">
-                                            <ImageCarousel
-                                                images={['/irradiance-1-wide.png', '/irradiance-2-wide.png']}
-                                                label="Fig 2.2: Irradiance Distribution"
-                                            />
-                                        </div>
-                                    )}
-                                    {activeTab === 'solidworks' && (
-                                        <div className="w-full h-full relative">
-                                            <ImageCarousel
-                                                images={['/3d-model-1-wide.png', '/3d-model-2-wide.png', '/projection-drawings-wide.png']}
-                                                label="Fig 2.3: Assembly CAD Model"
-                                            />
-                                        </div>
-                                    )}
+                            {/* Header with Icon */}
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className={`w-10 h-10 rounded-lg ${sim.iconBg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                                    <sim.icon className={`w-5 h-5 ${sim.iconColor}`} />
+                                </div>
+                                <div>
+                                    <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">
+                                        {sim.subtitle}
+                                    </div>
+                                    <h3 className="text-lg font-bold text-white">
+                                        {sim.title}
+                                    </h3>
                                 </div>
                             </div>
 
-                        </motion.div>
-                    </AnimatePresence>
+                            {/* Description */}
+                            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                                {sim.description}
+                            </p>
 
+                            {/* Key Points */}
+                            <ul className="space-y-3">
+                                {sim.points.map((point, i) => (
+                                    <li key={i} className="flex items-start gap-3 text-sm text-gray-400">
+                                        <div className={`w-4 h-4 rounded-full ${sim.iconBg} flex items-center justify-center shrink-0 mt-0.5`}>
+                                            <div className={`w-1.5 h-1.5 rounded-full ${sim.iconColor.replace('text-', 'bg-')}`} />
+                                        </div>
+                                        {point}
+                                    </li>
+                                ))}
+                            </ul>
+
+                            {/* Gradient Background Accent */}
+                            <div className={`absolute inset-0 bg-gradient-to-br ${sim.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none -z-10`} />
+                        </motion.div>
+                    ))}
                 </div>
+
             </div>
         </section>
     );
