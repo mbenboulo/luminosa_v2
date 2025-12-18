@@ -16,15 +16,15 @@ export default function Navbar({ mode = 'default', showNavLinks = true }: Navbar
 
     if (mode === 'simple') {
         return (
-            <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0B0E25]/80 border-b border-white/5">
+            <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0B0E25]/80 border-b border-white/5" role="navigation" aria-label="Main navigation">
                 <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
-                    <Link href="/" className="flex items-center gap-2 group text-gray-400 hover:text-white transition-colors">
-                        <ArrowLeft size={20} />
+                    <Link href="/" className="flex items-center gap-2 group text-gray-400 hover:text-white transition-colors" aria-label="Back to home page">
+                        <ArrowLeft size={20} aria-hidden="true" />
                         <span className="text-sm font-medium">Back to Home</span>
                     </Link>
 
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center">
+                    <Link href="/" className="flex items-center gap-2 group" aria-label="Luminosa home">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center" aria-hidden="true">
                             <Zap size={16} className="text-white fill-white" />
                         </div>
                         <span className="text-xl font-bold tracking-tight text-white group-hover:text-blue-200 transition-colors">
@@ -37,11 +37,11 @@ export default function Navbar({ mode = 'default', showNavLinks = true }: Navbar
     }
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0B0E25]/80 border-b border-white/5">
+        <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#0B0E25]/80 border-b border-white/5" role="navigation" aria-label="Main navigation">
             <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 group">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center">
+                <Link href="/" className="flex items-center gap-2 group" aria-label="Luminosa home">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center" aria-hidden="true">
                         <Zap size={16} className="text-white fill-white" />
                     </div>
                     <span className="text-xl font-bold tracking-tight text-white group-hover:text-blue-200 transition-colors">
@@ -51,7 +51,7 @@ export default function Navbar({ mode = 'default', showNavLinks = true }: Navbar
 
                 {/* Desktop Links */}
                 {showNavLinks && (
-                    <div className="hidden md:flex items-center gap-8">
+                    <div className="hidden md:flex items-center gap-8" role="list">
                         {[
                             { name: 'Motivation', href: '/#motivation' },
                             { name: 'Innovation', href: '/#technology' },
@@ -61,6 +61,7 @@ export default function Navbar({ mode = 'default', showNavLinks = true }: Navbar
                                 key={item.name}
                                 href={item.href}
                                 className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                                role="listitem"
                             >
                                 {item.name}
                             </Link>
@@ -74,6 +75,7 @@ export default function Navbar({ mode = 'default', showNavLinks = true }: Navbar
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsContactOpen(true)}
                     className="bg-[#4F46E5] hover:bg-[#4338ca] text-white px-5 py-2 rounded-full text-sm font-medium transition-colors shadow-[0_0_15px_rgba(79,70,229,0.5)]"
+                    aria-label="Open contact form"
                 >
                     Contact Us
                 </motion.button>
@@ -83,3 +85,4 @@ export default function Navbar({ mode = 'default', showNavLinks = true }: Navbar
         </nav>
     );
 }
+

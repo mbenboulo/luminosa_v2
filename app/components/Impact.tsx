@@ -51,7 +51,7 @@ export default function Impact() {
                         key={index}
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: false, amount: 0.2 }}
+                        viewport={{ once: true, amount: 0.2 }}
                         transition={{ delay: index * 0.1 }}
                         className="bg-[#0f1226] p-8 rounded-2xl border border-white/5 hover:border-white/10 hover:bg-[#141830] transition-all group"
                     >

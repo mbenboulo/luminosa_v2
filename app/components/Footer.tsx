@@ -7,14 +7,14 @@ import Image from 'next/image';
 
 export default function Footer() {
     return (
-        <footer className="bg-[#050816] border-t border-white/5 pt-16 pb-8">
+        <footer className="bg-[#050816] border-t border-white/5 pt-16 pb-8" role="contentinfo">
             <Section className="!py-0">
                 {/* Main Footer Content - Three Columns */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                     {/* Brand & Description */}
                     <div>
-                        <Link href="/" className="flex items-center gap-2 mb-6">
-                            <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                        <Link href="/" className="flex items-center gap-2 mb-6" aria-label="Luminosa home">
+                            <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center" aria-hidden="true">
                                 <Zap size={16} className="text-white fill-white" />
                             </div>
                             <span className="text-xl font-bold text-white">
@@ -27,7 +27,7 @@ export default function Footer() {
                     </div>
 
                     {/* Quick Links - Two Columns */}
-                    <div>
+                    <nav aria-label="Footer navigation">
                         <h4 className="font-bold text-white mb-6 uppercase text-xs tracking-wider">Quick Links</h4>
                         <div className="grid grid-cols-2 gap-x-8 gap-y-3">
                             <Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors">Home</Link>
@@ -35,7 +35,7 @@ export default function Footer() {
                             <Link href="/#motivation" className="text-sm text-gray-400 hover:text-white transition-colors">Motivation</Link>
                             <Link href="/#impact" className="text-sm text-gray-400 hover:text-white transition-colors">Impact</Link>
                         </div>
-                    </div>
+                    </nav>
 
                     {/* Supported By */}
                     <div>
@@ -46,10 +46,11 @@ export default function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="opacity-60 hover:opacity-100 transition-opacity w-fit"
+                                aria-label="KNUST - Kwame Nkrumah University of Science and Technology (opens in new tab)"
                             >
                                 <Image
                                     src="/knust.svg"
-                                    alt="KNUST"
+                                    alt="KNUST logo"
                                     width={120}
                                     height={60}
                                     className="h-10 w-auto"
@@ -60,10 +61,11 @@ export default function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="opacity-60 hover:opacity-100 transition-opacity w-fit"
+                                aria-label="DIPPER Lab - Distributed IoT Platforms Research Lab (opens in new tab)"
                             >
                                 <Image
                                     src="/dipper.svg"
-                                    alt="DIPPER Lab"
+                                    alt="DIPPER Lab logo"
                                     width={120}
                                     height={60}
                                     className="h-10 w-auto"
@@ -79,10 +81,12 @@ export default function Footer() {
                         <p className="text-xs text-gray-500">
                             © 2025 Luminosa Project. All rights reserved.
                         </p>
-                        <div className="flex gap-6">
-                            <Link href="#" className="text-xs text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
-                            <Link href="#" className="text-xs text-gray-500 hover:text-white transition-colors">Terms of Use</Link>
-                        </div>
+                        <nav aria-label="Legal navigation">
+                            <div className="flex gap-6">
+                                <Link href="#" className="text-xs text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
+                                <Link href="#" className="text-xs text-gray-500 hover:text-white transition-colors">Terms of Use</Link>
+                            </div>
+                        </nav>
                     </div>
                 </div>
             </Section>

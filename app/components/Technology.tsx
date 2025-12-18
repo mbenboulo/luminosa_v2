@@ -34,7 +34,7 @@ export default function Technology() {
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: false, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.8 }}
                 >
                     <div className="inline-block px-3 py-1 mb-6 rounded-full bg-indigo-900/30 border border-indigo-500/30 text-indigo-300 text-xs font-bold tracking-wider uppercase">
@@ -54,7 +54,7 @@ export default function Technology() {
                                 key={index}
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: false, amount: 0.2 }}
+                                viewport={{ once: true, amount: 0.2 }}
                                 transition={{ delay: 0.2 + (index * 0.1) }}
                                 className="flex gap-4"
                             >
@@ -76,7 +76,7 @@ export default function Technology() {
                 <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: false, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.8 }}
                     className="relative"
                 >
