@@ -1,24 +1,32 @@
 'use client';
 
 import { motion } from "framer-motion";
-import Image from 'next/image';
 import { Sun, Wind, Sliders, ShieldCheck, Asterisk } from 'lucide-react';
+import ImageCarousel from '../components/ImageCarousel';
 
 export default function SystemArchitecture() {
+    const carouselImages = [
+        '/luminosa.png',
+        '/luminosa-tracepro-overhead.png',
+        '/luminosa-tracepro-all4.png',
+        '/simulation-baby-tracepro.png',
+        '/luminosa-baby-tracepro2.png'
+    ];
+
     return (
-        <section className="py-20 relative">
-            <div className="container mx-auto px-6 md:px-12">
-                <div className="flex items-center gap-3 mb-12">
-                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                        <Asterisk className="text-white w-4 h-4" />
+        <section className="py-24 md:py-32 relative">
+            <div className="container mx-auto px-6 md:px-12 lg:px-20">
+                <div className="flex items-center gap-3 mb-16">
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                        <Asterisk className="text-white w-5 h-5" />
                     </div>
-                    <h2 className="text-2xl font-bold text-white">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white">
                         System Architecture Overview
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
-                    {/* Left: Isometric View Image Placeholder */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-stretch">
+                    {/* Left: Image Carousel */}
                     <motion.div
                         initial={{ opacity: 0, x: -20, scale: 0.95 }}
                         whileInView={{ opacity: 1, x: 0, scale: 1 }}
@@ -26,17 +34,7 @@ export default function SystemArchitecture() {
                         transition={{ duration: 0.8 }}
                         className="relative min-h-[400px] w-full flex flex-col"
                     >
-                        {/* Device Image */}
-                        <div className="flex-1 w-full h-full relative">
-                            <div className="relative w-full h-full min-h-[400px]">
-                                <Image
-                                    src="/luminosa.png"
-                                    alt="Luminosa Device"
-                                    fill
-                                    className="object-contain drop-shadow-[0_0_30px_rgba(59,130,246,0.2)]"
-                                />
-                            </div>
-                        </div>
+                        <ImageCarousel images={carouselImages} />
                     </motion.div>
 
                     {/* Right: Content */}
@@ -45,7 +43,7 @@ export default function SystemArchitecture() {
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="text-gray-400 mb-12 leading-relaxed"
+                            className="text-gray-400 text-base md:text-lg mb-12 leading-relaxed"
                         >
                             Our novel four-source configuration ensures uniform irradiance while
                             maintaining strict thermal safety limits. The system integrates real-time
@@ -53,7 +51,7 @@ export default function SystemArchitecture() {
                             traditional overhead projectors.
                         </motion.p>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             {[
                                 {
                                     icon: Sun,
@@ -88,9 +86,9 @@ export default function SystemArchitecture() {
                                     transition={{ delay: i * 0.1 }}
                                     className={`${item.bg} p-6 rounded-2xl border border-white/5 hover:border-blue-500/30 transition-colors group`}
                                 >
-                                    <item.icon className="text-blue-500 mb-4 w-5 h-5 group-hover:scale-110 transition-transform" />
-                                    <h3 className="text-white font-bold text-sm mb-1">{item.title}</h3>
-                                    <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
+                                    <item.icon className="text-blue-500 mb-4 w-6 h-6 group-hover:scale-110 transition-transform" />
+                                    <h3 className="text-white font-bold text-base mb-2">{item.title}</h3>
+                                    <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
                                 </motion.div>
                             ))}
                         </div>
@@ -100,3 +98,4 @@ export default function SystemArchitecture() {
         </section>
     );
 }
+

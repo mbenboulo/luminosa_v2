@@ -45,18 +45,18 @@ export default function SimulationTabs() {
     ];
 
     return (
-        <section className="py-20 relative">
-            <div className="container mx-auto px-6 md:px-12">
+        <section className="py-24 md:py-32 relative">
+            <div className="container mx-auto px-6 md:px-12 lg:px-20">
 
-                <div className="flex items-center gap-3 mb-12">
-                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                        <BarChart3 className="text-white w-4 h-4" />
+                <div className="flex items-center gap-3 mb-16">
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                        <BarChart3 className="text-white w-5 h-5" />
                     </div>
-                    <h2 className="text-2xl font-bold text-white">Simulation & Validation</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-white">Simulation & Validation</h2>
                 </div>
 
                 {/* Stats Row */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-12">
                     {stats.map((stat, i) => (
                         <motion.div
                             key={i}
@@ -66,9 +66,9 @@ export default function SimulationTabs() {
                             transition={{ delay: i * 0.1 }}
                             className="bg-[#111425] border border-white/5 p-6 rounded-xl"
                         >
-                            <div className="text-xs text-gray-400 mb-1">{stat.label}</div>
+                            <div className="text-xs text-gray-400 mb-2">{stat.label}</div>
                             <div className="flex items-baseline gap-1">
-                                <span className="text-2xl font-bold text-white">{stat.value}</span>
+                                <span className="text-2xl md:text-3xl font-bold text-white">{stat.value}</span>
                                 <span className="text-xs text-gray-500">{stat.unit}</span>
                             </div>
                         </motion.div>
@@ -76,7 +76,7 @@ export default function SimulationTabs() {
                 </div>
 
                 {/* Side-by-Side Simulation Cards */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {simulations.map((sim, index) => (
                         <motion.div
                             key={sim.id}
@@ -84,25 +84,25 @@ export default function SimulationTabs() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.2 }}
-                            className={`bg-[#111425] border ${sim.borderColor} rounded-2xl p-6 md:p-8 hover:border-opacity-60 transition-all group`}
+                            className={`bg-[#111425] border ${sim.borderColor} rounded-2xl p-8 hover:border-opacity-60 transition-all group relative`}
                         >
                             {/* Header with Icon */}
                             <div className="flex items-center gap-3 mb-6">
-                                <div className={`w-10 h-10 rounded-lg ${sim.iconBg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                                    <sim.icon className={`w-5 h-5 ${sim.iconColor}`} />
+                                <div className={`w-12 h-12 rounded-lg ${sim.iconBg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                                    <sim.icon className={`w-6 h-6 ${sim.iconColor}`} />
                                 </div>
                                 <div>
                                     <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">
                                         {sim.subtitle}
                                     </div>
-                                    <h3 className="text-lg font-bold text-white">
+                                    <h3 className="text-xl font-bold text-white">
                                         {sim.title}
                                     </h3>
                                 </div>
                             </div>
 
                             {/* Description */}
-                            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                            <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
                                 {sim.description}
                             </p>
 
@@ -128,3 +128,4 @@ export default function SimulationTabs() {
         </section>
     );
 }
+

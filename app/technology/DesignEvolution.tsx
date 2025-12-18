@@ -5,16 +5,16 @@ import { History, Lightbulb, RefreshCw } from "lucide-react";
 
 export default function DesignEvolution() {
     return (
-        <section className="py-20 relative">
-            <div className="container mx-auto px-6 md:px-12">
-                <div className="flex items-center gap-3 mb-12">
-                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                        <History className="text-white w-4 h-4" />
+        <section className="py-24 md:py-32 relative">
+            <div className="container mx-auto px-6 md:px-12 lg:px-20">
+                <div className="flex items-center gap-3 mb-16">
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                        <History className="text-white w-5 h-5" />
                     </div>
-                    <h2 className="text-2xl font-bold text-white">Design Evolution</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-white">Design Evolution</h2>
                 </div>
 
-                <div className="space-y-8 relative">
+                <div className="space-y-12 relative">
                     {/* Connecting Line */}
                     <div className="absolute left-[19px] top-10 bottom-10 w-0.5 bg-white/10 z-0" />
 
@@ -23,7 +23,7 @@ export default function DesignEvolution() {
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="relative z-10 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6"
+                        className="relative z-10 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8"
                     >
                         <div className="flex flex-col items-center pt-2">
                             <div className="w-10 h-10 rounded-full bg-[#111425] border border-white/10 flex items-center justify-center shadow-lg">
@@ -33,10 +33,10 @@ export default function DesignEvolution() {
 
                         <div className="bg-[#111425] border border-white/5 rounded-2xl p-1 overflow-hidden">
                             <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8">
-                                <div className="p-6 md:p-8 flex flex-col justify-center">
-                                    <div className="text-xs font-bold text-blue-400 mb-2 uppercase tracking-wider">Phase 1</div>
-                                    <h3 className="text-xl font-bold text-white mb-3">Initial Overhead Model</h3>
-                                    <p className="text-sm text-gray-400 leading-relaxed">
+                                <div className="p-8 flex flex-col justify-center">
+                                    <div className="text-xs font-bold text-blue-400 mb-3 uppercase tracking-wider">Phase 1</div>
+                                    <h3 className="text-2xl font-bold text-white mb-4">Initial Overhead Model</h3>
+                                    <p className="text-sm md:text-base text-gray-400 leading-relaxed">
                                         The original prototype utilized a single overhead light source. Testing revealed significant
                                         shadowing on the lateral aspects of the patient, reducing therapeutic efficacy by 40%.
                                     </p>
@@ -59,7 +59,7 @@ export default function DesignEvolution() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="relative z-10 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6"
+                        className="relative z-10 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8"
                     >
                         <div className="flex flex-col items-center pt-2">
                             <div className="w-10 h-10 rounded-full bg-[#111425] border border-blue-500/50 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.5)]">
@@ -70,10 +70,10 @@ export default function DesignEvolution() {
                         <div className="bg-[#111425] border border-blue-500/20 rounded-2xl p-1 overflow-hidden relative">
                             <div className="absolute inset-0 bg-blue-500/5 pointer-events-none" />
                             <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8 relative z-10">
-                                <div className="p-6 md:p-8 flex flex-col justify-center">
-                                    <div className="text-xs font-bold text-blue-400 mb-2 uppercase tracking-wider">Current Phase</div>
-                                    <h3 className="text-xl font-bold text-white mb-3">360-Degree Illumination</h3>
-                                    <p className="text-sm text-gray-400 leading-relaxed">
+                                <div className="p-8 flex flex-col justify-center">
+                                    <div className="text-xs font-bold text-blue-400 mb-3 uppercase tracking-wider">Current Phase</div>
+                                    <h3 className="text-2xl font-bold text-white mb-4">360-Degree Illumination</h3>
+                                    <p className="text-sm md:text-base text-gray-400 leading-relaxed">
                                         Incorporating four synchronized LED panels surrounding the patient bed. This iteration achieves
                                         a 0.72 uniformity ratio and eliminates shadowing, ensuring consistent bilirubin breakdown
                                         regardless of patient positioning.
@@ -99,3 +99,4 @@ export default function DesignEvolution() {
         </section>
     );
 }
+

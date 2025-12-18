@@ -30,7 +30,7 @@ export default function ModelViewer() {
                 camera={{
                     fov: 45,
                     position: [3, 2.5, 3],
-                    zoom: 1.9
+                    zoom: 1.79
                 }}
             >
                 <Suspense fallback={<Loader />}>

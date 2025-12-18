@@ -3,15 +3,16 @@
 import Section from './Section';
 import { Github, Twitter, Linkedin, Zap } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
     return (
         <footer className="bg-[#050816] border-t border-white/5 pt-16 pb-8">
             <Section className="!py-0">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
-
+                {/* Main Footer Content - Three Columns */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                     {/* Brand & Description */}
-                    <div className="md:col-span-5">
+                    <div>
                         <Link href="/" className="flex items-center gap-2 mb-6">
                             <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
                                 <Zap size={16} className="text-white fill-white" />
@@ -25,26 +26,50 @@ export default function Footer() {
                         </p>
                     </div>
 
-                    {/* Spacer */}
-                    <div className="hidden md:block md:col-span-3"></div>
-
-                    {/* Quick Links */}
-                    <div className="md:col-span-4">
+                    {/* Quick Links - Two Columns */}
+                    <div>
                         <h4 className="font-bold text-white mb-6 uppercase text-xs tracking-wider">Quick Links</h4>
-                        <ul className="space-y-3">
-                            <li>
-                                <Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors">Home</Link>
-                            </li>
-                            <li>
-                                <Link href="/#motivation" className="text-sm text-gray-400 hover:text-white transition-colors">Motivation</Link>
-                            </li>
-                            <li>
-                                <Link href="/#technology" className="text-sm text-gray-400 hover:text-white transition-colors">Innovation</Link>
-                            </li>
-                            <li>
-                                <Link href="/#impact" className="text-sm text-gray-400 hover:text-white transition-colors">Impact</Link>
-                            </li>
-                        </ul>
+                        <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+                            <Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors">Home</Link>
+                            <Link href="/#technology" className="text-sm text-gray-400 hover:text-white transition-colors">Innovation</Link>
+                            <Link href="/#motivation" className="text-sm text-gray-400 hover:text-white transition-colors">Motivation</Link>
+                            <Link href="/#impact" className="text-sm text-gray-400 hover:text-white transition-colors">Impact</Link>
+                        </div>
+                    </div>
+
+                    {/* Supported By */}
+                    <div>
+                        <h4 className="font-bold text-white mb-6 uppercase text-xs tracking-wider">Supported By</h4>
+                        <div className="flex flex-col gap-6">
+                            <Link
+                                href="https://knust.edu.gh"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="opacity-60 hover:opacity-100 transition-opacity w-fit"
+                            >
+                                <Image
+                                    src="/knust.svg"
+                                    alt="KNUST"
+                                    width={120}
+                                    height={60}
+                                    className="h-10 w-auto"
+                                />
+                            </Link>
+                            <Link
+                                href="https://dipperlab.knust.edu.gh"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="opacity-60 hover:opacity-100 transition-opacity w-fit"
+                            >
+                                <Image
+                                    src="/dipper.svg"
+                                    alt="DIPPER Lab"
+                                    width={120}
+                                    height={60}
+                                    className="h-10 w-auto"
+                                />
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
@@ -64,3 +89,5 @@ export default function Footer() {
         </footer>
     );
 }
+
+
